@@ -1,0 +1,56 @@
+---
+title: "Normal Calculations Bootcamp"
+output: pdf_document
+header-includes:
+   - \usepackage{upquote}
+---
+```{r, echo=FALSE}
+options(digits=3)
+```
+
+
+In all questions solve for $x$ unless otherwise specified.
+
+In all questions $Z \sim N(0,1)$. 
+
+I will always parametrize normals using $\mu$ and $\sigma^2$. So, for example, $X \sim N(4, 12)$ means $\mu = 4$ and $\sigma^2 = 12$. 
+
+Use the table at the back of the textbook (unless I tell you not to use the table, which means the answer can be obtained from properties of normal distributions alone). That's the point of this bootcamp. 
+
+The table only goes to a cetain number of digits, so it may not be possible to get to the precise answer given here, which was done using the computer (and how these calculations are done in real life). The table can give you an "upper" answer and a "lower" answer which you could investigate to see the magnitude of the error due to lack of precision. You will see the error is usually small. My advice would be not to worry about it too much.
+
+If you are an R user you can look at the source code of this document to see how to do the calculations in R (look inside the code wrapped by \verb+`r `+ at the end of each line.)
+
+Symmetry is your friend!
+
+**If you find an error in the solutions, let me know and I'll fix it!**
+
+1. $P(Z \le 0.5) = x$ \hfill (`r pnorm(0.5)`)
+
+2. $P(Z \ge 0.5) = x$ \hfill (`r pnorm(0.5, lower=FALSE)`)
+
+3. $P(Z \ge -0.5) = x$ \hfill (`r pnorm(-0.5, lower = FALSE)`)
+
+4. For any $X \sim N(\mu, \sigma^2)$, $P(\mu - k\sigma \le X \mu + k\sigma) = x$, for $k \in \{1,2,3\}$. \hfill (`r pnorm(1:3) - pnorm(-1:-3)`)
+
+4. $P(-1 < Z < 1.5)$ \hfill (`r pnorm(1.5) - pnorm(-1)`)
+
+4. $P(\{-2 < Z < -1\} \cup \{1 < Z < 2\})$ \hfill (`r 2*(pnorm(2)-pnorm(1))`)
+
+5. $P(Z \le x) = 0.5$ without using the table. \hfill (`r qnorm(0.5)`)
+
+6. $P(Z \le x) = 0.75$ \hfill (`r qnorm(0.75)`)
+
+7. $P(-x < Z < x) = 0.5$ \hfill (`r -qnorm(0.25)`)
+
+8. $P(Z < x) = 1$ without using the table. \hfill (Undefined. Or, $x = \infty$ if you like.)
+
+6. $X \sim N(4, 12).$ Solve $P(X < 4)$ without using the table. \hfill (0.5)
+
+7. $X \sim N(4, 12).$ Solve $P(X > -2) = x$. \hfill (`r pnorm(-2, 4, sqrt(12), lower=FALSE)`)
+
+8. $X \sim N(-4, 12).$ Solve $P(X < 2) =x$. \hfill (`r pnorm(2, -4, sqrt(12))`)
+
+13. $X \sim N(4, 12).$ Solve $P(X \ge x) = 0.99.$ \hfill (`r qnorm(0.99, 4, sqrt(12), lower=FALSE)`)
+
+14. $X \sim N(-5, 10).$ Solve $P(-6 < X < x) = 0.5.$ \hfill (`r qnorm(0.5 + pnorm(-6,-5,sqrt(10)), -5, sqrt(10))`)
