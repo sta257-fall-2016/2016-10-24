@@ -102,7 +102,7 @@ The SAT is a standardized test taken mainly by USA high school students, and som
 
 The scores can be modeled using a normal distribution (why?) with, according to the May 2016 report, mean 1020 and standard deviation 194. 
 
-What is the probability that a student will have a score that exceeds 1400?
+What is the probability that a student will have a score that exceeds 1250?
 
 The answer is `r round(pnorm(1250, 1020, 194, lower.tail=FALSE), 4)` according to my computer. 
 
@@ -171,6 +171,16 @@ $$\F{Y}(y) = \F{X}(\sqrt{y}) - \F{X}(-\sqrt{y})$$
 
 $$\f{Y}(y) = \frac{1}{2\sqrt{y}}\left(\f{X}(\sqrt{y}) + \f{X}(-\sqrt{y})\right)$$
 Example: $Z \sim N(0,1)$ and $Y = Z^2$. Then $Y$ has a $\text{Gamma}{\left(\frac{1}{2}, \frac{1}{2}\right)}$ distribution, a.k.a. $\chi^2_1$, with a bonus fun fact for free.
+
+## $Y = Z^2 \sim \chi^2_1$ derivation
+
+$$\begin{align}
+\f{Y}(y) &= \frac{1}{2\sqrt{y}}\left(\f{Z}(\sqrt{y}) + \f{Z}(-\sqrt{y})\right)\\
+&= \frac{1}{\sqrt{y}}\f{Z}(\sqrt{y}) \quad \text{(not always true - used symmetry of normal density)}\\
+&=\frac{1}{\sqrt{y}}\frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2}(\sqrt{y})^2}\\
+&=\frac{\frac{1}{2}^{\frac{1}{2}}}{\sqrt{\pi}}y^{\frac{1}{2}-1}e^{-y/2}\end{align}$$
+
+Bonus free fun fact: $\Gamma(\alpha) = \sqrt{\pi}$.
 
 ## DOFORV method 2 - direct "theorem"
 
